@@ -3,126 +3,127 @@
 #
 #-*- HW Card name -*-
 #
-ctl.lbd { type hw; card Loopback }
-pcm.lbd { type hw; card Loopback }
-ctl.hdi { type hw; card HDMI }
-pcm.hdi { type hw; card HDMI }
-ctl.pch { type hw; card PCH }
-pcm.pch { type hw; card PCH }
-ctl.ctl { type hw; card CMI8788 }
-pcm.cmi { type hw; card CMI8788; device 1 }
+defaults.ctl.!card 1;
+#ctl.lbd { type hw; card Loopback }
+#pcm.lbd { type hw; card Loopback }
+#ctl.hdi { type hw; card HDMI }
+#pcm.hdi { type hw; card HDMI }
+#ctl.pch { type hw; card PCH }
+#pcm.pch { type hw; card PCH }
+#ctl.ctl { type hw; card CMI8788 }
+#pcm.cmi { type hw; card CMI8788; device 1 }
 #
 #-*- zita-a2j/j2a + Loopback -*-
 #  a=alsa c=capture p=playback lp=loop z=zita
 #
-pcm.pzlp { type plug; slave.pcm "hw:Loopback,1,0" }
-pcm.czlp {
-	type dsnoop
-	ipc_key 1048
-	slave.pcm "hw:Loopback,1,0"
-}
-pcm.palp { type plug; slave.pcm "hw:Loopback,1,1" }
-pcm.calp {
-	type dsnoop
-	ipc_key 1046
-	slave.pcm "hw:Loopback,1,1"
-}
-pcm.plp { type plug; slave.pcm "hw:Loopback,0,1" }
-pcm.clp {
-	type dsnoop
-	ipc_key 1046
-	slave.pcm "hw:Loopback,0,1"
-}
+#pcm.pzlp { type plug; slave.pcm "hw:Loopback,1,0" }
+#pcm.czlp {
+#	type dsnoop
+#	ipc_key 1048
+#	slave.pcm "hw:Loopback,1,0"
+#}
+#pcm.palp { type plug; slave.pcm "hw:Loopback,1,1" }
+#pcm.calp {
+#	type dsnoop
+#	ipc_key 1046
+#	slave.pcm "hw:Loopback,1,1"
+#}
+#pcm.plp { type plug; slave.pcm "hw:Loopback,0,1" }
+#pcm.clp {
+#	type dsnoop
+#	ipc_key 1046
+#	slave.pcm "hw:Loopback,0,1"
+#}
 # Full-Duplex variant using the previous devices
-pcm.dlp {
-	type asym
-	playback.pcm plp
-	capture.pcm clp
-}
+#pcm.dlp {
+#	type asym
+#	playback.pcm plp
+#	capture.pcm clp
+#}
 #
 #-*- DEFAULT -*-
 #
-pcm.!default { type plug; slave.pcm dlp }
-ctl.!default { type hw  ; card PCH }
+#pcm.!default { type plug; slave.pcm dlp }
+#ctl.!default { type hw  ; card PCH }
 #
 #-*- BS2B -*-
 #
-pcm.bs2b { type plug; slave.pcm plugbs2b }
-pcm.plugbs2b {
-	type ladspa
-	slave.pcm dmixer
-	path /usr/lib/ladspa
-	plugins [
-	{
-		label bs2b
-		input { controls [ 700 4.5 ] }
-	}
-	]
-}
+#pcm.bs2b { type plug; slave.pcm plugbs2b }
+#pcm.plugbs2b {
+#	type ladspa
+#	slave.pcm dmixer
+#	path /usr/lib/ladspa
+#	plugins [
+#	{
+#		label bs2b
+#		input { controls [ 700 4.5 ] }
+#	}
+#	]
+#}
 #
 #-*- JACK -*-
 #
-pcm.jack { type plug; slave.pcm jackplug }
-pcm.jackplug {
-	type jack
-	playback_ports {
-		0 system:playback_1
-		1 system:playback_2
-		2 system:playback_3
-		3 system:playback_4
-	}
-	capture_ports {
-		0 system:capture_1
-		1 system:capture_2
-	}
-}
+#pcm.jack { type plug; slave.pcm jackplug }
+#pcm.jackplug {
+#	type jack
+#	playback_ports {
+#		0 system:playback_1
+#		1 system:playback_2
+#		2 system:playback_3
+#		3 system:playback_4
+#	}
+#	capture_ports {
+#		0 system:capture_1
+#		1 system:capture_2
+#	}
+#}
 #
 #-*- MBEQ -*-
 #
-pcm.eq { type plug; slave.pcm plugeq }
-pcm.plugeq {
-	type ladspa
-	slave.pcm dmixer
-	path /usr/lib/ladspa
-	plugins [
-	{
-		label mbeq
-		id 1197
-		input {
-			#bands: 50hz,100hz,156hz,220hz,311hz,440hz,622hz,880hz,
-			#1250hz,1750hz,25000hz,50000hz,10000hz,20000hz
-			controls [ -5 -5 -5 -5 -5 -10 -20 -15 -10 -10 -10 -10 -10 -3 -2 ]
-		}
-	}
-	]
-}
+#pcm.eq { type plug; slave.pcm plugeq }
+#pcm.plugeq {
+#	type ladspa
+#	slave.pcm dmixer
+#	path /usr/lib/ladspa
+#	plugins [
+#	{
+#		label mbeq
+#		id 1197
+#		input {
+#			#bands: 50hz,100hz,156hz,220hz,311hz,440hz,622hz,880hz,
+#			#1250hz,1750hz,25000hz,50000hz,10000hz,20000hz
+#			controls [ -5 -5 -5 -5 -5 -10 -20 -15 -10 -10 -10 -10 -10 -3 -2 ]
+#		}
+#	}
+#	]
+#}
 #
 #-*- DMIX -*-
 #
-pcm.dmixer { type plug; slave.pcm dmixplug }
-pcm.dmixplug {
-	type dmix
-	ipc_key_add_uid true
-	ipc_key 1048
-	ipc_perm 0660
-	ipc_gid audio
-	slave {
-		pcm pch
-		rate 48000
-		period_time 0
-		period_size 1024
-		buffer_size 8192
-	}
-	bindings {
-		0 0
-		1 1
-	}
-}
+#pcm.dmixer { type plug; slave.pcm dmixplug }
+#pcm.dmixplug {
+#	type dmix
+#	ipc_key_add_uid true
+#	ipc_key 1048
+#	ipc_perm 0660
+#	ipc_gid audio
+#	slave {
+#		pcm pch
+#		rate 48000
+#		period_time 0
+#		period_size 1024
+#		buffer_size 8192
+#	}
+#	bindings {
+#		0 0
+#		1 1
+#	}
+#}
 #
 #-*- EQUALIZER -*-
 #
-pcm.equal { type plug; slave.pcm plugequal }
-pcm.plugequal { type equal; slave.pcm dmixer }
+#pcm.equal { type plug; slave.pcm plugequal }
+#pcm.plugequal { type equal; slave.pcm dmixer }
 #
 #-*- OSS ALSA-EMU -*-
 #
@@ -137,7 +138,7 @@ pcm.plugequal { type equal; slave.pcm dmixer }
 #
 #-*- ALSA OSS-EMU -*-
 #
-pcm.oss { type plug; slave.pcm dmixer }
+#pcm.oss { type plug; slave.pcm dmixer }
 #
 # vim:fenc=utf-8:ci:pi:sts=0:sw=2:ts=2:
 #

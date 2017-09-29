@@ -1,4 +1,15 @@
 #!/bin/zsh
 
-# MPD daemon start (if no other user instance exists)
-if [ ! -s ~/.mpd/mpd.pid ] { mpd }
+killall -q mpd
+while pgrep -u $UID -x mpd >/dev/null; do sleep 1; done
+
+killall -q ympd
+while pgrep -u $UID -x ympd >/dev/null; do sleep 1; done
+
+mpd &
+
+ympd \
+    --host z800.gnu.local \
+    --port 6600 \
+    --webport 8080 \
+    --user wandsas &
