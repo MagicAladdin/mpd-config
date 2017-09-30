@@ -22,11 +22,11 @@ ncmpcpp_directory = ~/.ncmpcpp
 ## (eg. ncmpc) also use that location.
 ##
 #
-lyrics_directory = ~/.lyrics
+lyrics_directory = ~/.ncmcpp/lyrics
 #
 ##### connection settings #####
 #
-mpd_host = "127.0.0.1"
+mpd_host = "z800.gnu.local"
 #
 mpd_port = "6600"
 #

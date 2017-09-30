@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 killall -q mpd
 while pgrep -u $UID -x mpd >/dev/null; do sleep 1; done
@@ -13,3 +13,8 @@ ympd \
     --port 6600 \
     --webport 8080 \
     --user wandsas &
+
+echo "mpd launched..."
+
+# -*- mode: sh -*-
+# vim: fenc=utf-8 ft=sh
