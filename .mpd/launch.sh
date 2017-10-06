@@ -9,10 +9,7 @@ while pgrep -u $UID -x mpd >/dev/null; do sleep 1; done
 
 mpd &
 
-ympd \
-    --host z800.gnu.local \
-    --webport 8080 \
-    --user wandsas &
+ympd --host z800.gnu.local --user wandsas &
 
 # -*- mode: sh
 # vim: fenc=utf-8 ft=sh
