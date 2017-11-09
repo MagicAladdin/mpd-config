@@ -516,9 +516,10 @@ color1 = red
 #
 #color2 = white
 color2 = yellow
-#
+
 #main_window_highlight_color = yellow
-main_window_highlight_color = yellow
+current_item_prefix = yellow
+current_item_suffix = yellow
 
 #progressbar_color = black
 progressbar_color = blue
@@ -533,7 +534,9 @@ statusbar_color = cyan
 alternative_ui_separator_color = yellow
 #
 #active_column_color = red
-active_column_color = red
+current_item_inactive_column_prefix = red
+current_item_inactive_column_suffix = red
+
 #
 #visualizer_color = yellow
 visualizer_color = yellow
