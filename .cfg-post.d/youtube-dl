@@ -12,5 +12,6 @@ main () {
         get_youtubedl
     fi
 }
+main "$@"
 
 # vim: fenc=utf-8 ft=sh
