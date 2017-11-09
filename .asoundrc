@@ -3,7 +3,7 @@
 #
 #-*- HW Card name -*-
 #
-defaults.ctl.!card 1;
+#defaults.ctl.!card 1;
 #ctl.lbd { type hw; card Loopback }
 #pcm.lbd { type hw; card Loopback }
 #ctl.hdi { type hw; card HDMI }
