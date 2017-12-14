@@ -1,7 +1,7 @@
 # ~/.config/youtube-dl.conf
 # https://github.com/rg3/youtube-dl.git
 # http://xmodulo.com/how-to-download-youtube-playlist-in-linux.html
-	
+
 
 --output ~/.cache/youtube-dl/%(title)s.%(ext)s
 --restrict-filenames
@@ -20,7 +20,6 @@
 --write-thumbnail		# write thumbnail image to disk
 --add-metadata			# write metadata to video file
 
-
 --continue			# resume partially downloaded files
 --ignore-errors			# continue on download errors
 --no-overwrites			# do not overwrite files
@@ -38,5 +37,18 @@
 --default-search auto		# warn for unqualified urls
 --no-call-home			# do not contact youtube-dl server for debug
 
-# create files with all wanted video urls
-# youtube-dl --batch-file=my_video_urls
+#
+# Download multiple media-files witch a batch-file, e.g.:
+#
+
+# cat > my_video_urls <<'EOF'
+# https://soundcloud.com/zehninrecords/lucy-the-hermit-zehnin01
+# https://soundcloud.com/zehninrecords/lucy-the-high-priestess-zehnin01
+# https://soundcloud.com/lucy/your-cell-will-teach-you-all-things-mix-cd
+# https://soundcloud.com/stroboscopicartefacts/salp004_sacd007
+# https://www.youtube.com/watch?v=ZE4PpbxLYyg
+# EOF
+
+# $ ~ > youtube-dl --batch-file=my_video_urls
+
+# vim: fenc=utf-8 ft=cfg
