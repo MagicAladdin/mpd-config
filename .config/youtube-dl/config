@@ -1,54 +1,72 @@
-# ~/.config/youtube-dl.conf
+#
+# ~/.config/youtube-dl/config wandsas 2018/01/03
+#
+
+# References:
 # https://github.com/rg3/youtube-dl.git
 # http://xmodulo.com/how-to-download-youtube-playlist-in-linux.html
 
-
+## Output directory
 --output ~/.cache/youtube-dl/%(title)s.%(ext)s
 --restrict-filenames
 
+## Cache directory
 --cache-dir /tmp/youtube-dl
 
---format mp4
+
+#
+# Video setup
+#
+
+--format mp4,mp3
 --merge-output-format mp4
 --recode-video=mp4		# encode to another format if necessary
 
---extract-audio			# convert video files to audio-only
---audio-format m4a
---audio-quality 0
---keep-video 			# keep video after extracting audio files
---embed-thumbnail		# embed thumbnail in the audio as cover art
---write-thumbnail		# write thumbnail image to disk
---add-metadata			# write metadata to video file
 
---continue			# resume partially downloaded files
---ignore-errors			# continue on download errors
---no-overwrites			# do not overwrite files
---console-title			# display progress in titlebar
---newline			# output progress bar as new lines
+#
+# Audio setup
+#
+
+--audio-format m4a
+--extract-audio			  # convert video files to audio-only
+--audio-quality 0
+--keep-video 			    # keep video after extracting audio files
+--embed-thumbnail		  # embed thumbnail in the audio as cover art
+--write-thumbnail		  # write thumbnail image to disk
+--add-metadata			  # write metadata to video file
+
+
+#
+# General settings
+#
+
+--continue			      # resume partially downloaded files
+--ignore-errors			  # continue on download errors
+--no-overwrites			  # do not overwrite files
+--console-title			  # display progress in titlebar
+--newline			        # output progress bar as new lines
 --encoding UTF-8
 --hls-prefer-native		# use native HLS downloader instead of ffmpeg
---hls-use-mpegts		# use mpegts container, playing video when downloading
+--hls-use-mpegts		  # use mpegts container, playing video when downloading
 
 --prefer-free-formats
 --youtube-skip-dash-manifest	# do not download DASH manifests & related data
 --prefer-ffmpeg
---no-mtime			# do not use last-modified as modification time
---no-part			# do not use .part files - write into file
---default-search auto		# warn for unqualified urls
---no-call-home			# do not contact youtube-dl server for debug
+--no-mtime			      # do not use last-modified as modification time
+--no-part			        # do not use .part files - write into file
+--default-search auto	# warn for unqualified urls
+--no-call-home			  # do not contact youtube-dl server for debug
+
 
 #
-# Download multiple media-files witch a batch-file, e.g.:
+# Batch download - Download multiple media-files witch a batch-file, e.g.:
 #
 
 # cat > my_video_urls <<'EOF'
 # https://soundcloud.com/zehninrecords/lucy-the-hermit-zehnin01
 # https://soundcloud.com/zehninrecords/lucy-the-high-priestess-zehnin01
 # https://soundcloud.com/lucy/your-cell-will-teach-you-all-things-mix-cd
-# https://soundcloud.com/stroboscopicartefacts/salp004_sacd007
-# https://www.youtube.com/watch?v=ZE4PpbxLYyg
 # EOF
-
 # $ ~ > youtube-dl --batch-file=my_video_urls
 
 # vim: fenc=utf-8 ft=cfg
