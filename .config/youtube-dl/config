@@ -1,24 +1,43 @@
-# File: ~/.config/youtube-dl/config
+# {{{ Header
+# Filename: ~/.config/youtube-dl/config
+# Description: User config for the youtube download script
 # Author: Sascha Wander <sascha.wander@gmail.com
-# License: BSD 2-Clause License
+# License: MIT or 2-Clause/new simplified BSD
 # Created: 2018/02/03 04:04:25 wandsas
-# Last Modified: 2018/02/03 04:04:25
-# ---------------------------------------------------------------------------------------
-# References:
+# Last Modified: 2018/02/10 22:56:50
+# }}}
+# {{{ References
+
 # https://github.com/rg3/youtube-dl.git
 # http://xmodulo.com/how-to-download-youtube-playlist-in-linux.html
-#
 # https://beets.readthedocs.io/en/v1.4.6/
 # https://github.com/beetbox/beets
 # http://beets.io/blog/py3k.html
 # https://ffmpeg.org/
 # https://libav.org/
-#
-# ---------------------------------------------------------------------------------------
+
+# }}}
+# {{{ Get youtube-dl script
+
+# sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+# sudo chmod a+rx /usr/local/bin/youtube-dl
+
+# }}}
+# {{{ Quickstar batch download
+
+# Download multiple files in a batch-file.:
+
+# cat > my_video_urls <<'EOF'
+# https://soundcloud.com/zehninrecords/lucy-the-hermit-zehnin01
+# https://soundcloud.com/zehninrecords/lucy-the-high-priestess-zehnin01
+# https://soundcloud.com/lucy/your-cell-will-teach-you-all-things-mix-cd
+# EOF
+# youtube-dl --batch-file=my_video_urls
+
+# }}}
 
 ### Output directory ###
---output ~/tmp/%(title)s.%(ext)s
---restrict-filenames
+--output /tmp/youtube-dl/%(title)s.%(ext)s
 
 ### Cache directory ###
 --cache-dir /tmp
@@ -32,6 +51,7 @@
 --audio-format m4a
 --extract-audio                 # convert video files to audio-only
 --audio-quality 0
+--restrict-filenames
 --keep-video                    # keep video after extracting audio files
 --embed-thumbnail               # embed thumbnail in the audio as cover art
 --write-thumbnail               # write thumbnail image to disk
@@ -55,20 +75,7 @@
 --default-search auto           # warn for unqualified urls
 --no-call-home                  # do not contact youtube-dl server for debug
 
-
-### Batch download ###
-
-# Download multiple media-files witch a batch-file, e.g.:
-
-# ~ # cat > my_video_urls <<'EOF'
-# https://soundcloud.com/zehninrecords/lucy-the-hermit-zehnin01
-# https://soundcloud.com/zehninrecords/lucy-the-high-priestess-zehnin01
-# https://soundcloud.com/lucy/your-cell-will-teach-you-all-things-mix-cd
-# EOF
-# ~ # youtube-dl --batch-file=my_video_urls
-
-# ---------------------------------------------------------------------------------------
-# {{{ vim-footer
+# {{{ Footer
 # vim:fileencoding=utf-8:filetype=config:foldmethod=marker:foldlevel=0:
 # -*- mode: config -*-
 # }}}
