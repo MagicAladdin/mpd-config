@@ -40,7 +40,7 @@
 --output /tmp/youtube-dl/%(title)s.%(ext)s
 
 ### Cache directory ###
---cache-dir /tmp
+--cache-dir /tmp/youtube-dl/cache
 
 ### Video setup ###
 --format mp4,mp3
