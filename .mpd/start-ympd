@@ -1,0 +1,52 @@
+#!/bin/sh
+
+#
+# start-ympd - Start or restart ympd service
+#
+
+# Terminate already running ympd service instance, if they exist.
+# Wait until the processes have been shut down and start it again
+#
+
+if [[ -e "$ZDOTDIR/lib/functions.bash" ]]; then
+    source $ZDOTDIR/lib/functions.bash
+fi
+
+# Functions
+
+# Check if a ympd instance is running
+is_running () {
+    [[ -n "$(pgrep -u $UID -x ympd >/dev/null)" ]]
+}
+
+# Start ympd service with web address "http://z800.gnu.local:8800"
+start_ympd ()
+    ${YMPD_PROG} \
+        --host "z800.gnu.local" \               # mpd host
+        --port 6600 \                           # mpd host port
+        --user "wandsas" \                      # mpd user
+        --mpdpass "hackme" \                    # mpd password
+        --webport "z800.gnu.local:8800" >/dev/null 2>&1 \
+            || die "Starting ympd service failed"
+    pr-info "ympd service started"
+}
+
+# Stop ympd service
+stop_ympd () {
+    # Terminate already running instances
+    killall -q ympd
+    # Wait until the processes have been shut down
+    while is_running; do sleep 1; done
+    pr-info "No ympd service is running anymore"
+}
+
+main () {
+    pr-begin "Init ympd service"
+    is_running && stop_ympd
+    start_ympd
+    pr-end $?  "ympd service finished with status $?"
+}
+
+main "$@"
+
+# vim:fenc=utf-8:ft=sh:
