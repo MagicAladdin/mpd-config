@@ -11,7 +11,7 @@ ympd \
     --host 10.0.6.10 \
     --port 6600 \
     --user wandsas \
-    --mpdpass hackme \
     --webport 8081 >/dev/null 2>&1 &
 
+    #--mpdpass hackme \
 # vim:fenc=utf-8:ft=sh:

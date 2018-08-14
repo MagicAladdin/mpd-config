@@ -7,8 +7,9 @@ audio_device_state:1:alsa-jack
 audio_device_state:1:alsa-dmixer
 audio_device_state:1:alsa-bs2b
 audio_device_state:1:jack
-state: stop
-current: 0
+state: play
+current: 8
+time: 4.075000
 random: 0
 repeat: 0
 single: 0
