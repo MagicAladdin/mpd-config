@@ -1,1 +1,4 @@
 .mpd/mpd.pid
+.mpd/mpd.db
+.mpd/mpd.state
+.mpd/sticker.sql
